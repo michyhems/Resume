@@ -12,6 +12,15 @@ router.get("/", async (req, res) => {
     }
 });
 
+//health check endpoint
+router.get("/health", async (req, res) => {
+    try {
+        res.status(200).json("OK");
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+});
+
 //Create
 router.post("/", async (req, res) => {
     const body = req.body;
