@@ -1,0 +1,916 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+@import url('https://fonts.googleapis.com/css2?family=Petit+Formal+Script&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+}
+
+:root{
+    --bgColour:#101827;
+    --navColour: #11141d;
+    --borderColour:#1E293B;
+    --textAccent: #03388f;
+    --shadow:#111824;
+}
+
+body{
+    background-color: var(--bgColour);
+}
+
+.body{
+    width: 100%;
+    height: 100%;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    font-family: Poppins;
+    color: white;
+}
+
+nav{
+    background-color: var(--navColour);
+    width: 300px;
+    font-size: 1.5em;
+    padding-right: 10px;
+    border-right: solid 1px var(--borderColour);
+    text-align: left;
+    height: 100vh;
+    position: sticky;
+    transition: 300ms ease-in-out;
+    overflow: hidden;
+    text-wrap: nowrap;
+}
+nav.close{
+    padding-right: 5px;
+    width: 56px;
+}
+
+nav >ul> li >a{
+    margin: 10px;
+    padding: 0.25em;
+    display: flex;
+    align-items: center;
+    gap: 1em;
+
+}
+
+nav >ul> li >a > span{
+    flex-grow: 1;
+    text-decoration: none;
+}
+
+a{
+    text-decoration: none;
+    color: white;
+}
+
+@media (width < 500px) {
+  /* … */
+  .logo, .signiture{
+    display: none;
+  }
+  nav, nav.close{
+    width: 100vw;
+    height: 70px;
+    display: flex;
+  }
+  nav >ul> li >a{
+    display: flex;
+    flex-direction: column;
+    gap:0.5em;
+    font-size: 0.5em;
+
+  }
+  nav > ul {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    list-style-type: none;
+    
+  }
+  nav{
+    position: fixed;
+    bottom: 0;
+    z-index: 1;
+  }
+
+  .body{
+    /*
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto auto;*/
+    display: flex;
+    flex-direction: column-reverse;    
+  }
+
+  .container, .education{
+    margin-bottom: 70px;
+    display: flex;
+    align-items:center;
+  }
+
+  #experienceContainer{
+    display: block;
+  }
+
+  .profileContainer{
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+
+}
+
+svg{
+    min-width: 24px;
+}
+
+svg:hover{
+    cursor: pointer;
+}
+.logo{
+    display: flex;
+    justify-content: flex-end;
+    font-weight: bold;
+}
+
+.logo svg{
+    transition: 200ms ease;
+}
+
+.logo svg.rotate{
+    transform: rotate(180deg);
+}
+
+.selected svg{
+    fill: var(--textAccent);
+}
+
+.selected span{
+    color: var(--textAccent);
+}
+
+
+
+/*targets active elements of the sidenav*/
+.active{
+    color: var(--textAccent);
+    svg{
+        fill: var(--textAccent);
+    }
+}
+
+a:hover{
+    cursor: pointer;
+}
+
+main{
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 0;
+}
+
+
+/*  Intro content   */
+.profileContainer{
+    background-color: var(--navColour);
+    max-width: 450px;
+    min-width: 310px;
+    height: 600px;
+    padding: 10px;
+    border-radius: 10px;
+    position: relative;
+}
+
+/*glowing border effect*/
+.profileContainer::after,.profileContainer::before{
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    border-radius: 10px;
+    padding: 1.5px;
+    z-index: -1;
+    background-image: conic-gradient(from 110deg, transparent, var(--borderColour)10%, transparent 20%, transparent 50%, var(--borderColour)60%, transparent 70%);
+   
+    
+}
+.profileContainer::before{
+    filter: blur(10px);
+    opacity: 0.5;
+}
+
+
+.introContent{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+/*Marque animation*/
+
+.wrapper{
+    width: 100%;
+    height: fit-content;
+}
+
+.skillElement{
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.wrapper[data-animated="true"]{
+    overflow: hidden;
+    mask: linear-gradient(90deg, transparent, white 15%, white 85%, transparent);
+}
+.wrapper[data-animated="true"] .skillElement{
+    width: fit-content;
+    flex-wrap: nowrap;
+    animation: scroller 40s var(--_animation-direction, forwards) linear infinite;
+}
+
+.wrapper[data-direction="right"]{
+    --_animation-direction: reverse;
+}
+
+@keyframes scroller {
+    to{
+        transform: translate(calc(-50% - 0.5rem));
+    }
+}
+
+.skill{
+    background-color: var(--borderColour);
+    white-space: nowrap;
+    height: fit-content;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.skills{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+}
+
+
+/*  Education Content*/
+
+.education{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    gap: 2em;
+}
+.educationContainer{
+    display: grid;
+    width: 100%;
+    height: fit-content;
+    grid-template-columns: repeat(auto-fit, 300px);
+    justify-content: center;
+    align-items: center;
+    gap: 2em;
+    overflow: scroll;
+}
+
+.educationContainer::-webkit-scrollbar {
+  display: none;
+}
+
+
+.educationCard{
+    width: 300px;
+    height: 400px;
+    perspective: 1000px;
+    cursor: pointer;
+}
+
+.inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.educationCard:hover .inner {
+  transform: rotateY(180deg);
+}
+
+.front, .back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  border-radius: 10px;
+}
+
+.front{
+    background-color: var(--borderColour);
+}
+
+.back {
+  background: var(--navColour);
+  border: solid 1px var(--borderColour);
+  transform: rotateY(180deg);
+  padding: 5px;
+}
+
+.educationCard img{
+    flex-shrink: 0;
+    min-height: 100%;
+    width: 300px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.back h2{
+    font-size: 1.25em;
+}
+
+.back h3{
+    font-size: 1em;
+}
+
+.back a{
+    text-decoration: none;
+    color: var(--textAccent);
+}
+
+/*scroll in case dimensions of education content change*/
+.container{
+    width: 100%;
+    height: 100vh;
+    overflow: scroll;
+    scroll-timeline-name: --anime;
+}
+#intro{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container::-webkit-scrollbar {
+  display: none;
+}
+
+
+/*  Experience Content  */
+
+section{
+    height: 100vh;
+    align-items: center;
+    overflow: scroll;
+    view-timeline-name: --section;
+}
+section::-webkit-scrollbar{
+    display: none;
+}
+
+
+section h1{
+    font-size: 3em;
+}
+
+/*Section 1*/
+.recruitBox h1{
+    position: relative;
+    width:fit-content;
+}
+.recruitBox h1::after{
+    content: '';
+    position: absolute;
+    height: 1em;
+    width: 10px;
+    top: 16%;
+    background-color: white;
+    animation: blink 1.5s steps(2) infinite;
+}
+.recruitBox, .kidding{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+/*Section 2*/
+
+.kidding{
+    animation: appear linear;
+    animation-timeline: view() !important;
+    animation-range: entry 0 !important;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
+}
+
+@keyframes appear{
+    from{
+        opacity:0;
+        scale:0.5;
+    }
+    to{
+        opacity: 1;
+        scale: 1;
+    }
+}
+
+/*Section 3*/
+
+
+
+.start{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.title, .titleInView{
+    display: flex;
+}
+
+.title span, .titleInView span{
+    opacity: 0;
+    filter: blur(5px);
+}
+
+.titleInView span:nth-child(1){
+    transform: translateX(-500px);
+    animation: enter 0.25s linear forwards;
+}
+.titleInView span:nth-child(2){
+    transform: translateX(500px);
+    animation: enter 0.25s linear forwards;
+}
+
+@keyframes enter{
+    100%{
+        opacity: 1;
+        filter: none;
+        transform: translateX(-0);
+    }
+}
+
+/*Section 4*/
+.capstone{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+}
+
+/*Stone archway*/
+.arch{
+    width: 40vw;
+    height: 100%;
+    padding-left: 10%;
+    padding-right: 10%;
+    border-top-left-radius: 100%;
+    border-top-right-radius: 100%;
+    background-image: url("./images/pexels-pixabay-220182.jpg");
+    background-size: contain;
+    position: relative;
+    z-index: 0;
+}
+
+/*Inside archway*/
+.underArch{
+    position: absolute;
+    width: 80%;
+    height: 90%;
+    top: 55%;
+    left: 50%;
+    translate: -50% -50%;
+    background-color: var(--bgColour);
+    border: solid 1px var(--bgColour);
+    border-top-left-radius: 100%;
+    border-top-right-radius: 100%;
+    z-index: 1;
+}
+
+.capstoneText{
+    display: none;
+    grid-area: text;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 2;
+}
+
+.capTitle{
+    width: fit-content;
+    position: relative;
+}
+
+.capTitle::before,.capTitle::after{
+    content: '';
+    position: absolute;
+    top:0;
+    right:0;
+    bottom: 0;
+    left: 0;
+}
+
+.capTitle::before{
+    background-color: var(--bgColour);
+    animation: type forwards;
+    animation-timeline: --section !important;
+    animation-range: entry 0.5;
+}
+
+@keyframes type{
+
+    to{
+        left: 125%;
+    }
+}
+
+.def{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1em;
+}
+
+.def hr{
+    width: 50%;
+}
+
+/*Cursive quote*/
+.defenition{
+    font-family: Petit Formal Script;
+    font-size: 1.5em;
+    font-weight: 400;
+    animation: emerge linear;
+    animation-timeline: --section !important;
+    animation-range: entry 0 cover 50% !important;
+}
+
+@keyframes emerge{
+    from{
+        opacity: 0;
+        transform: translateY(75px);
+    }to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.defRef{
+    animation: rise linear;
+    animation-timeline: --section !important;
+    animation-range: entry 0 cover 50% !important;
+}
+
+@keyframes rise{
+    from{
+        opacity: 0;
+        transform: translateY(-75px);
+    }to{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/*Section 5*/
+.capDescription{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    height: fit-content;
+    gap: 1em;
+}
+
+.hospital{
+    display: flex;
+    width: 75%;
+    gap: 1em;
+    img{
+        opacity: 0;
+        animation: toRight linear forwards;
+        animation-timeline: --section !important;
+        animation-range: entry 45% cover 35% !important;
+    }
+    div{
+        opacity: 0;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: left;
+        animation: toLeft linear forwards;
+        animation-timeline: --section !important;
+        animation-range: entry 45% cover 35% !important;
+    }
+}
+
+@keyframes toRight{
+    from{
+        transform: translateX(100px);
+        opacity: 0.5;
+        filter: blur(10px);
+    }
+    to{
+        transform: translateX(0);
+        opacity: 1;
+        filter: none;
+    }
+}
+
+@keyframes toLeft{
+    from{
+        transform: translateX(-100px);
+        opacity: 0.5;
+        filter: blur(10px);
+    }
+    to{
+        transform: translateX(0);
+        opacity: 1;
+        filter: none;
+    }
+}
+
+.experienceCardSection{
+    height: 300vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-top: 100px;
+    overflow: visible;
+}
+.experienceWrapper{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    text-align: left;
+}
+
+.experienceWrapper .cardContainer{
+    height: 100vh;
+    position: sticky;
+    top:100px;
+    .card{
+        height: 45vh;
+        display: grid;
+        grid-template-columns: 50% 50%;
+        background-color: var(--navColour);
+        border: solid 1px var(--borderColour);
+        border-radius: 10px;
+        padding: 10px;
+        align-items: center;
+        .cardDescription{
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+        }
+        img{
+            width: 100%;
+            height: auto;
+        }
+    }
+}
+
+.experienceWrapper .cardContainer:nth-child(2) .card{
+    margin-top: 10px;
+}
+.experienceWrapper .cardContainer:nth-child(3) .card{
+    margin-top: 20px;
+}
+
+
+
+
+.mask{
+    color: transparent;
+    background-image: linear-gradient(to right, red, green, blue);
+    background-size: 200%;
+    background-position: 0 50%;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation:animate-mask 5s infinite alternate linear;
+}
+
+@keyframes animate-mask{
+     0% {
+        background-position: 0 50%;
+    }
+    100% {
+        background-position: 100% 50%;
+    }
+}
+
+
+
+
+/*  Project Content */
+.listItem{
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-areas: "thumbnail contentstuff";
+    max-width: 1400px;
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-block: 20px;
+    list-style: none;
+    border: solid 1px var(--borderColour);
+    border-radius: 10px;
+    padding: 5px;
+    background-color: var(--navColour);
+    transition: all 0.5s ease;
+    position: relative;
+    overflow: hidden;
+    gap:0.5em;
+    align-items: center;
+}
+
+.listItem a{
+    width: fit-content;
+}
+
+.listItem::before{
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -100%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        0deg, 
+        transparent, 
+        var(--textAccent),
+        transparent
+    );
+    transform: rotate(-45deg);
+    transition: all 0.5s ease;
+    opacity: 0;
+}
+
+.listItem:hover{
+    cursor: pointer;
+    transform: scale(1.05);
+    box-shadow: 0 0 20px var(--textAccent);
+    img{
+        animation: enlarge 0.5s linear forwards;
+    }
+}
+
+@keyframes enlarge{
+    0%{}
+    75%{
+        border-radius: 10px;
+    }
+    100%{
+        border-radius: 10px;
+    }
+}
+
+.listItem:hover::before{
+    opacity: 1;
+    transform: rotate(-45deg) translateY(350%);
+}
+
+.thumbnail{
+    grid-area: thumbnail;
+    width: 150px;
+    height: auto;
+    border-radius: 100%;
+}
+
+.content{
+    grid-area: contentstuff;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    text-align: left;
+}
+
+.content a{
+    text-decoration: none;
+    color: var(--textAccent);
+}
+
+.waitMessage{
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+}
+
+.loading{
+    display: flex;
+    gap: 1em;
+}
+
+.loading div{
+    width: 40px;
+    height: 40px;
+    background-color: var(--textAccent);
+    border-radius: 50%;
+    animation: load 3s steps(3) infinite;
+}
+
+.loading div:nth-child(1){
+    animation-delay: 1s;
+}
+
+.loading div:nth-child(2){
+    animation-delay: 2s;
+}
+
+.loading div:nth-child(3){
+    animation-delay: 3s;
+}
+
+@keyframes load {
+  0% {
+    opacity: 0.3;
+  }
+  100%{
+    opacity: 1;
+  }
+}
+
+
+
+@media (width < 500px){
+    .content{
+        height: 100px;
+        overflow: hidden;
+        mask: linear-gradient(transparent, white 15%, white 60%, transparent);
+    }
+
+    .content > p, a{
+        font-size: 12px;
+    }
+
+    .listItem:hover .content{
+        height: auto;
+        overflow: visible;
+        mask: unset;
+        transition: ease-in;
+    }
+
+    .thumbnail{
+        width: 100px;
+    }
+    .cardContainer{
+        width: 80vw;
+        align-self: center;
+    }
+
+    p{
+        font-size: 12px;
+    }
+    h1,.h1{
+        font-size: 20px;
+    }
+    .hospital > img{
+        width: 50px;
+    }
+    
+
+    iframe{
+        width: 10px !important;
+    }
+
+
+    .arch{
+        width: 90vw;
+    }
+    .underArch{
+        width: 90%;
+        height: 97%;
+    }
+
+}
