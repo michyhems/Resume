@@ -15,7 +15,7 @@ function App() {
                     <Route element={<Layout></Layout>}>
                         <Route
                             exact
-                            path="/"
+                            path="/Resume"
                             element={<Introduction></Introduction>}
                         ></Route>
                         <Route
