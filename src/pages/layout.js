@@ -6,18 +6,16 @@ const Layout = () => {
     const mql = window.matchMedia("(width <= 500px)");
     const [focus, setFocus] = useState("home");
     const location = useLocation();
-    /*
+    
     useEffect(() => {
         const path = location.pathname.split("/");
-        console.log(path.length);
-        /*
-        if (path[1] === "education") setFocus("education");
-        else if (path[1] === "experience") setFocus("experience");
-        else if (path[1] === "projects") setFocus("projects");
+        if (path[path.length - 1] === "education") setFocus("education");
+        else if (path[path.length - 1] === "experience") setFocus("experience");
+        else if (path[path.length - 1] === "projects") setFocus("projects");
         else setFocus("home");
         
     }, []);
-*/
+
     useEffect(() => {
         if (document.getElementById(focus).classList.contains("selected"))
             return;
