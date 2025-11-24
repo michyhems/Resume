@@ -1,7 +1,7 @@
 {
   "name": "profile-site",
   "version": "0.1.0",
-  "homepage": "https://gitname.github.io/Resume",
+  "homepage": ".",
   "private": true,
   "dependencies": {
     "@testing-library/dom": "^10.4.1",
