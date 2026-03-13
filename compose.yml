@@ -1,0 +1,22 @@
+services:
+    node-application:
+        build: .
+        image: resume:v1
+        ports:
+            - "${SERVER_HOST_PORT}:${SERVER_CONTAINER_PORT}"
+        environment:
+            DATABASE_URL: "mongodb://${USER}:${PASSWORD}@mongo:${DB_PORT}/profileDB?authSource=admin"
+        depends_on:
+            - mongo
+    mongo:
+        image: mongo
+        restart: always
+        volumes:
+            - mongo-data:/data/db
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: "${USER}"
+            MONGO_INITDB_ROOT_PASSWORD: "${PASSWORD}"
+volumes:
+    mongo-data:
+        driver: local
+

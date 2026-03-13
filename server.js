@@ -4,7 +4,7 @@ const app = express();
 const mongoose = require("mongoose");
 const cors = require("cors");
 const corsOptions = require("./config/cors");
-const PORT = process.env.PORT || 3500;
+const PORT = process.env.SERVER_CONTAINER_PORT || 3500;
 const bodyParser = require("body-parser");
 
 const connectDB = async () => {
@@ -27,5 +27,5 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/api", require("./routes/api"));
 
 app.listen(PORT, () =>
-    console.log(`Server has started and listening on port ${PORT}`)
+    console.log(`Server has started and listening on port ${PORT}`),
 );
